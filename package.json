@@ -1,6 +1,7 @@
 {
   "name": "cleanblog",
   "version": "1.0.0",
+  "main": "app.js",
   "description": "",
   "scripts": {
     "start": "nodemon app.js",
@@ -18,6 +19,7 @@
   },
   "homepage": "https://github.com/uguryediveren/CLEAN-BLOG#readme",
   "dependencies": {
+    "ejs": "^3.1.9",
     "express": "^4.18.2"
   },
   "devDependencies": {
