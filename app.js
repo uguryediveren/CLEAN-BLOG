@@ -1,25 +1,33 @@
 const express = require('express');
 const app = express();
 const ejs = require('ejs');
+const Post = require('./models/Post');
 
 const PORT = 3001;
 
 app.set('view engine', 'ejs');
 app.use(express.static('public'));
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
-app.get('/', (req, res) => {
-  res.render('index');
-  console.log('index');
+app.get('/', async (req, res) => {
+  const posts = await Post.find({});
+  res.render('index', {
+    posts,
+  });
 });
 
 app.get('/about', (req, res) => {
   res.render('about');
-  console.log('about');
 });
 
 app.get('/add_post', (req, res) => {
   res.render('add_post');
-  console.log('add_post');
+});
+
+app.post('/posts', async (req, res) => {
+  await Post.create(req.body);
+  res.redirect('/');
 });
 
 app.listen(PORT, () => {
